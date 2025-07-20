@@ -67,7 +67,7 @@ install_packages() {
             PACKAGES="fish starship kitty hyprland waybar rofi swww grim slurp wl-clipboard \
                      brightnessctl playerctl pamixer pavucontrol networkmanager-applet \
                      polkit-gnome xdg-desktop-portal-hyprland qt5-qtwayland qt6-qtwayland \
-                     hypridle hyprlock wallust wlogout cava jq curl git stow"
+                     hypridle hyprlock wallust wlogout cava dunst jq curl git stow"
             
             sudo dnf install -y $PACKAGES
             
@@ -83,7 +83,7 @@ install_packages() {
             PACKAGES="fish starship kitty hyprland waybar rofi swww grim slurp wl-clipboard \
                      brightnessctl playerctl pamixer pavucontrol network-manager-applet \
                      polkit-gnome xdg-desktop-portal-hyprland qt5-wayland qt6-wayland \
-                     hypridle hyprlock wlogout cava jq curl git stow"
+                     hypridle hyprlock wlogout cava dunst jq curl git stow"
             
             # Check if we have paru, yay, or use pacman
             if command -v paru &> /dev/null; then
@@ -108,7 +108,7 @@ install_packages() {
             
             # Basic packages available in repos
             BASIC_PACKAGES="fish kitty rofi grim slurp wl-clipboard brightnessctl \
-                           playerctl pavucontrol network-manager-gnome \
+                           playerctl pavucontrol network-manager-gnome dunst \
                            polkit-gnome-authentication-agent-1 jq curl git stow"
             
             sudo apt install -y $BASIC_PACKAGES
@@ -135,7 +135,7 @@ install_packages() {
             PACKAGES="fish starship kitty rofi grim slurp wl-clipboard brightnessctl \
                      playerctl pavucontrol NetworkManager-applet polkit-gnome \
                      xdg-desktop-portal-hyprland qt5-qtwayland qt6-qtwayland \
-                     wlogout cava jq curl git stow"
+                     wlogout cava dunst jq curl git stow"
             
             sudo zypper install -y $PACKAGES
             
@@ -158,7 +158,7 @@ install_packages() {
             # Void Linux packages
             PACKAGES="fish starship kitty rofi grim slurp wl-clipboard brightnessctl \
                      playerctl pamixer pavucontrol NetworkManager polkit-gnome \
-                     jq curl git stow"
+                     dunst jq curl git stow"
             
             sudo xbps-install -S $PACKAGES
             
