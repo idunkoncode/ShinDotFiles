@@ -17,24 +17,46 @@ dotfiles/
 │   ├── kitty/                # Kitty terminal emulator config
 │   ├── nvim/                 # Neovim text editor config
 │   └── cargo/                # Rust Cargo configuration
-├── install.sh                # Installation script
+├── setup.sh                  # Automated system setup script
+├── install.sh                # Basic installation script
+├── sync.sh                   # Automatic sync script
 └── README.md                 # This file
 ```
 
 ## 🚀 Installation
 
-1. Clone this repository to your home directory:
+### Quick Setup (Automated)
+
+1. Clone this repository:
    ```bash
-   git clone <repository-url> ~/dotfiles
+   git clone git@github.com:idunkoncode/ShinDotFiles.git ~/dotfiles
+   cd ~/dotfiles
    ```
 
-2. Run the installation script:
+2. Run the automated setup script (installs packages + configures everything):
    ```bash
+   ./setup.sh
+   ```
+
+3. Install automatic syncing (optional but recommended):
+   ```bash
+   ./sync.sh --install
+   ```
+
+### Manual Setup
+
+1. Clone this repository:
+   ```bash
+   git clone git@github.com:idunkoncode/ShinDotFiles.git ~/dotfiles
    cd ~/dotfiles
+   ```
+
+2. Install packages manually, then run:
+   ```bash
    ./install.sh
    ```
 
-3. Restart your shell or source the config:
+3. Restart your shell:
    ```fish
    source ~/.config/fish/config.fish
    ```
@@ -77,6 +99,45 @@ dotfiles/
 - **Rust/Cargo**: Rust toolchain configuration
   - Cargo settings and aliases
   - Build and dependency management
+
+## 🤖 Automation Scripts
+
+### `setup.sh` - Automated System Setup
+
+Completely automates the installation of all required packages and dotfiles setup:
+
+```bash
+./setup.sh    # Full system setup with package installation
+```
+
+**What it does:**
+- Updates system packages
+- Installs Hyprland, Fish, Neovim, Kitty, Waybar, Rofi
+- Installs Rust, .NET, Node.js development tools
+- Configures Fish as default shell
+- Installs JetBrains Mono Nerd Font
+- Creates all dotfiles symlinks
+- Sets up SSH configuration
+
+### `sync.sh` - Automatic Dotfiles Sync
+
+Keeps your dotfiles repository in sync with your current configurations:
+
+```bash
+./sync.sh --sync       # Run one sync cycle
+./sync.sh --install    # Install automatic sync every 15 minutes
+./sync.sh --uninstall  # Remove automatic sync
+./sync.sh --daemon     # Run continuously
+./sync.sh --help       # Show all options
+```
+
+**Features:**
+- Automatically detects changes in your config files
+- Syncs current configs back to the dotfiles repository
+- Commits and pushes changes to GitHub
+- Handles merge conflicts automatically
+- Runs every 15 minutes when installed as cron job
+- Comprehensive logging to `~/dotfiles/sync.log`
 
 ## 🔐 SSH Setup
 
