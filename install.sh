@@ -67,7 +67,7 @@ install_packages() {
             PACKAGES="fish starship kitty hyprland waybar rofi swww grim slurp wl-clipboard \
                      brightnessctl playerctl pamixer pavucontrol networkmanager-applet \
                      polkit-gnome xdg-desktop-portal-hyprland qt5-qtwayland qt6-qtwayland \
-                     hypridle hyprlock wallust wlogout cava dunst jq curl git stow"
+                     hypridle hyprlock wallust wlogout cava dunst jq curl git stow code"
             
             sudo dnf install -y $PACKAGES
             
@@ -83,7 +83,7 @@ install_packages() {
             PACKAGES="fish starship kitty hyprland waybar rofi swww grim slurp wl-clipboard \
                      brightnessctl playerctl pamixer pavucontrol network-manager-applet \
                      polkit-gnome xdg-desktop-portal-hyprland qt5-wayland qt6-wayland \
-                     hypridle hyprlock wlogout cava dunst jq curl git stow"
+                     hypridle hyprlock wlogout cava dunst jq curl git stow code"
             
             # Check if we have paru, yay, or use pacman
             if command -v paru &> /dev/null; then
@@ -117,6 +117,15 @@ install_packages() {
             if ! command -v starship &> /dev/null; then
                 log_info "Installing starship..."
                 curl -sS https://starship.rs/install.sh | sh -s -- -y
+            fi
+            
+            # Install VS Code
+            if ! command -v code &> /dev/null; then
+                log_info "Installing VS Code..."
+                curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+                echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+                sudo apt update
+                sudo apt install -y code
             fi
             
             # Install hyprland and related (may need PPA or manual install)
@@ -210,7 +219,7 @@ backup_configs() {
     BACKUP_DIR="$HOME/.config_backup_$(date +%Y%m%d_%H%M%S)"
     mkdir -p "$BACKUP_DIR"
     
-    configs_to_backup=("fish" "kitty" "hypr" "waybar" "rofi" "starship.toml")
+    configs_to_backup=("fish" "kitty" "hypr" "waybar" "rofi" "starship.toml" "Code")
     
     for config in "${configs_to_backup[@]}"; do
         if [ -e "$HOME/.config/$config" ]; then
@@ -282,6 +291,22 @@ configure_tide() {
     log_success "Tide prompt configured"
 }
 
+# Install VS Code extensions
+install_vscode_extensions() {
+    if command -v code &> /dev/null; then
+        log_info "Installing VS Code extensions..."
+        
+        if [ -x "$HOME/.config/Code/install-extensions.sh" ]; then
+            bash "$HOME/.config/Code/install-extensions.sh"
+            log_success "VS Code extensions installed"
+        else
+            log_warning "VS Code extensions script not found or not executable"
+        fi
+    else
+        log_warning "VS Code not found, skipping extensions installation"
+    fi
+}
+
 # Post-installation setup
 post_install_setup() {
     log_info "Running post-installation setup..."
@@ -316,8 +341,9 @@ main() {
     echo -e "${YELLOW}This script will:${NC}"
     echo "  • Install required packages for your distribution"
     echo "  • Backup your existing configurations"
-    echo "  • Install dotfiles (Fish, Kitty, Hyprland, Waybar, Rofi)"
+    echo "  • Install dotfiles (Fish, Kitty, Hyprland, Waybar, Rofi, VS Code)"
     echo "  • Configure fish shell with tide prompt"
+    echo "  • Install VS Code extensions"
     echo "  • Set fish as your default shell"
     echo
     
@@ -347,6 +373,9 @@ main() {
     echo
     
     configure_tide
+    echo
+    
+    install_vscode_extensions
     echo
     
     post_install_setup

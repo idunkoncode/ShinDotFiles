@@ -1,0 +1,8 @@
+{
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.colorTheme": "Tomorrow Night Blue",
+    "workbench.startupEditor": "none",
+    "telemetry.telemetryLevel": "off"
+}
