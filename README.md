@@ -9,8 +9,14 @@ dotfiles/
 ├── config/
 │   ├── fish/
 │   │   └── config.fish       # Fish shell configuration
-│   └── starship/
-│       └── starship.toml     # Starship prompt configuration
+│   ├── starship/
+│   │   └── starship.toml     # Starship prompt configuration
+│   ├── hypr/                 # Hyprland window manager config
+│   ├── waybar/               # Waybar status bar config
+│   ├── rofi/                 # Rofi launcher config
+│   ├── kitty/                # Kitty terminal emulator config
+│   ├── nvim/                 # Neovim text editor config
+│   └── cargo/                # Rust Cargo configuration
 ├── install.sh                # Installation script
 └── README.md                 # This file
 ```
@@ -43,6 +49,34 @@ dotfiles/
   - Cargo bin path configuration
   
 - **Starship**: Custom prompt configuration
+
+- **Hyprland**: Wayland compositor configuration
+  - Window management rules
+  - Keybindings and workspace setup
+  - Display and input configuration
+
+- **Waybar**: Status bar configuration
+  - System monitoring widgets
+  - Custom styling and colors
+  - Workspace and window information
+
+- **Rofi**: Application launcher configuration
+  - Custom themes and styling
+  - Enhanced search functionality
+
+- **Kitty**: Terminal emulator configuration
+  - Custom themes and color schemes
+  - Font and rendering settings
+  - Key bindings and behavior
+
+- **Neovim**: Text editor configuration
+  - Plugin management and configuration
+  - Custom key bindings
+  - Language server setup
+
+- **Rust/Cargo**: Rust toolchain configuration
+  - Cargo settings and aliases
+  - Build and dependency management
 
 ## 🔐 SSH Setup
 
